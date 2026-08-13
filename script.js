@@ -194,3 +194,42 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
   });
+// Dynamic Spacing DOM Elements
+  const fontSizeSelect = document.getElementById('fontSizeSelect');
+  const lineHeightSelect = document.getElementById('lineHeightSelect');
+
+  // Create & Append Page Counter Badge inside Preview
+  const pageBadge = document.createElement('div');
+  pageBadge.className = 'page-count-badge';
+  pageBadge.textContent = 'Page 1 of 1';
+  paperPreview.appendChild(pageBadge);
+
+  // 1. Adjust Font Size Dynamically
+  fontSizeSelect.addEventListener('change', (e) => {
+    previewBody.style.fontSize = e.target.value;
+    checkPageOverflow();
+  });
+
+  // 2. Adjust Line Spacing Dynamically
+  lineHeightSelect.addEventListener('change', (e) => {
+    previewBody.style.lineHeight = e.target.value;
+    checkPageOverflow();
+  });
+
+  // 3. Detect multi-page overflow dynamically
+  function checkPageOverflow() {
+    // Standard A4 height threshold
+    const isOverflowing = paperPreview.scrollHeight > paperPreview.clientHeight;
+
+    if (isOverflowing) {
+      const estimatedPages = Math.ceil(paperPreview.scrollHeight / paperPreview.clientHeight);
+      pageBadge.textContent = `Page 1 of ${estimatedPages} (Multi-Page)`;
+      pageBadge.style.background = '#c62828'; // Alert red
+    } else {
+      pageBadge.textContent = 'Fits on 1 Page';
+      pageBadge.style.background = 'rgba(0, 0, 0, 0.6)'; // Normal dark
+    }
+  }
+
+  // Monitor text input for page overflow updates
+  letterTextInput.addEventListener('input', checkPageOverflow);
