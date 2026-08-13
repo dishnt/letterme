@@ -426,6 +426,49 @@ input[type="file"] {
   border-radius: 6px;
   cursor: pointer;
   width: 100%;
+}/* =============================================================
+   PART 9: MULTI-PAGE & OVERFLOW CONTROLS
+   ============================================================= */
+
+/* Dynamic Page Overflow Indicator in Preview */
+.paper-container {
+  overflow-y: auto; /* Allows smooth scrolling if letter exceeds 1 page */
+  scroll-behavior: smooth;
+}
+
+/* Visual Multi-Page Indicator Badge */
+.page-count-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  pointer-events: none;
+}
+
+/* Ensure clean page breaks when printing via Ctrl + P */
+@media print {
+  .paper-container {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  .letter-body {
+    page-break-inside: auto;
+  }
+
+  /* Force page breaks cleanly at paragraph ends if letter goes to page 2 */
+  p, div {
+    page-break-inside: avoid;
+  }
+
+  .page-count-badge {
+    display: none !important;
+  }
 }
 
 input[type="file"]:hover {
