@@ -402,3 +402,32 @@ textarea {
   border-bottom: 1px solid #ebdccb;
   color: #2d3748;
 }
+/* Radio Choice Switcher */
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+/* File Upload Field Styling */
+input[type="file"] {
+  background: #fdfaf6;
+  border: 1px dashed #8b5a2b;
+  padding: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="file"]:hover {
+  background: #f5eedf;
+}
