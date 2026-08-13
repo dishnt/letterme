@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
   paperSelect.addEventListener('change', (e) => {
     // Remove all previous paper theme classes
     paperPreview.classList.remove(
+     'official-a4',
+      'executive-cream',
       'parchment', 
       'kraft', 
       'rose', 
