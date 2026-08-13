@@ -28,6 +28,13 @@ body {
   font-weight: bold;
 }
 
+.logo span {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #f4e8c1;
+}
+
 .tagline {
   font-size: 0.9rem;
   opacity: 0.8;
@@ -83,6 +90,7 @@ label {
 }
 
 input[type="text"],
+input[type="file"],
 textarea,
 select {
   width: 100%;
@@ -91,6 +99,12 @@ select {
   border-radius: 6px;
   font-size: 0.95rem;
   transition: border-color 0.2s;
+}
+
+input[type="file"] {
+  background: #fdfaf6;
+  border: 1px dashed #8b5a2b;
+  cursor: pointer;
 }
 
 input[type="text"]:focus,
@@ -102,6 +116,22 @@ select:focus {
 
 textarea {
   resize: vertical;
+}
+
+/* Radio Choice Switcher */
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
+  cursor: pointer;
 }
 
 /* Add-ons Section */
@@ -128,11 +158,6 @@ textarea {
   cursor: pointer;
 }
 
-.checkbox-container input {
-  cursor: pointer;
-}
-
-/* Primary Button */
 .btn-primary {
   width: 100%;
   padding: 0.9rem;
@@ -154,7 +179,7 @@ textarea {
 .preview-panel {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the A4 sheet inside the preview pane */
+  align-items: center;
   background: #e8e2d7;
   padding: 2rem;
   overflow-y: auto;
@@ -163,9 +188,9 @@ textarea {
 /* Exact A4 Ratio Container */
 .paper-container {
   width: 100%;
-  max-width: 595px;          /* Standard A4 pixel width at 72 DPI */
-  aspect-ratio: 1 / 1.4142;  /* Strict ISO A4 Proportion (210mm x 297mm) */
-  padding: 3.5rem 3rem;       /* Professional standard margins */
+  max-width: 595px;
+  aspect-ratio: 1 / 1.4142;
+  padding: 3.5rem 3rem;
   border-radius: 2px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
   position: relative;
@@ -173,10 +198,109 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
-/* Adjusted Font Sizes for A4 Proportion */
+/* Header Image / Logo Box */
+.preview-logo-container {
+  max-width: 120px;
+  max-height: 70px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.preview-logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Paper Templates */
+.paper-container.parchment {
+  background-color: #f4e8c1;
+  background-image: radial-gradient(#e0cf9b 10%, transparent 11%);
+  background-size: 12px 12px;
+  border: 1px solid #d4c28d;
+}
+
+.paper-container.kraft {
+  background-color: #d1b280;
+  background-image: radial-gradient(#b89865 15%, transparent 16%);
+  background-size: 10px 10px;
+  border: 1px solid #aa8957;
+  color: #2b1d0c;
+}
+
+.paper-container.rose {
+  background-color: #fdf0f2;
+  background-image: radial-gradient(#f7d3d9 20%, transparent 20%);
+  background-size: 16px 16px;
+  border: 1px solid #f2bdc6;
+  color: #4a2c33;
+}
+
+.paper-container.midnight {
+  background-color: #1a1e29;
+  border: 1px solid #333a4d;
+  color: #e5c158;
+}
+
+.paper-container.midnight .letter-body,
+.paper-container.midnight .letter-header,
+.paper-container.midnight .signature {
+  color: #e5c158 !important;
+}
+
+.paper-container.official-a4 {
+  background-color: #ffffff;
+  border-top: 6px solid #1a365d;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1a202c;
+}
+
+.paper-container.executive-cream {
+  background-color: #faf8f5;
+  border-top: 6px solid #744210;
+  border-bottom: 1px solid #ebdccb;
+  color: #2d3748;
+}
+
+/* Professional Templates */
+.paper-container.corp-letterhead {
+  background-color: #ffffff;
+  border-top: 8px solid #0f2b48;
+  border-bottom: 3px solid #0f2b48;
+  color: #1f2937;
+}
+
+.paper-container.exec-minimal {
+  background-color: #ffffff;
+  border-left: 6px solid #4b5563;
+  color: #111827;
+}
+
+.paper-container.modern-sidebar {
+  background-color: #fafafa;
+  border-top: 5px solid #2563eb;
+  border-left: 5px solid #2563eb;
+  color: #1e293b;
+}
+
+.paper-container.cert-formal {
+  background-color: #fffdfa;
+  border: 12px double #b45309;
+  padding: 3rem !important;
+  color: #78350f;
+  text-align: center;
+}
+
+.paper-container.cert-formal .letter-header {
+  text-align: center;
+}
+
+/* Paper Contents */
 .letter-header {
   text-align: right;
   font-size: 0.95rem;
@@ -187,7 +311,7 @@ textarea {
 .letter-body {
   flex-grow: 1;
   font-size: 1.1rem;
-  line-height: 1.7;
+  line-height: 1.6;
   white-space: pre-wrap;
   word-wrap: break-word;
   color: #2b2b2b;
@@ -204,65 +328,8 @@ textarea {
   font-size: 1.25rem;
   font-weight: bold;
 }
-.paper-container {
-  min-height: 450px;
-  padding: 2.5rem 2rem;
-  border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.3s ease;
-}
 
-/* Paper Theme Options */
-.paper-container.parchment {
-  background-color: #f4e8c1;
-  background-image: radial-gradient(#e0cf9b 10%, transparent 11%);
-  background-size: 12px 12px;
-  border: 1px solid #d4c28d;
-}
-
-.paper-container.classic {
-  background-color: #fffdd0;
-  border: 1px solid #eee8aa;
-}
-
-.paper-container.pure-white {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-}
-
-/* Paper Contents */
-.letter-header {
-  text-align: right;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-}
-
-.letter-body {
-  flex-grow: 1;
-  font-size: 1.15rem;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  color: #2b2b2b;
-}
-
-.letter-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 2rem;
-}
-
-.signature {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-/* Wax Seal Graphic Badge */
+/* Wax Seal Graphic */
 .wax-seal-graphic {
   width: 60px;
   height: 60px;
@@ -281,162 +348,7 @@ textarea {
   transform: rotate(-12deg);
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
-  }
-}
-/* =============================================================
-   PART 5: PRINT STYLESHEET (Ctrl + P Optimization)
-   ============================================================= */
-
-@media print {
-  /* 1. Hide all website UI controls and background elements */
-  .navbar,
-  .control-panel,
-  h2,
-  .wax-seal-graphic {
-    display: none !important;
-  }
-
-  /* 2. Reset page background and layout */
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-    padding: 0;
-    margin: 0;
-  }
-
-  .app-container {
-    display: block;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .preview-panel {
-    background: none !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* 3. Standardize letter page to full A4 dimensions */
-  .paper-container {
-    width: 100%;
-    min-height: 100vh;
-    padding: 2.5cm 2cm !important; /* Standard 1-inch printable margins */
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important; /* Uses physical stationery paper texture */
-  }
-
-  .letter-body {
-    font-size: 14pt; /* Optimal physical print typography size */
-    line-height: 1.6;
-    color: #111111 !important;
-  }
-
-  .letter-header,
-  .signature {
-    color: #111111 !important;
-  }
-}
-/* =============================================================
-   NEW AESTHETIC PAPER TEMPLATES
-   ============================================================= */
-
-/* 1. Vintage Kraft Paper */
-.paper-container.kraft {
-  background-color: #d1b280;
-  background-image: radial-gradient(#b89865 15%, transparent 16%);
-  background-size: 10px 10px;
-  border: 1px solid #aa8957;
-  color: #2b1d0c;
-}
-
-/* 2. Rose Romance (Soft Blush Pink) */
-.paper-container.rose {
-  background-color: #fdf0f2;
-  background-image: radial-gradient(#f7d3d9 20%, transparent 20%);
-  background-size: 16px 16px;
-  border: 1px solid #f2bdc6;
-  color: #4a2c33;
-}
-
-/* 3. Midnight Gold (Dark Luxury Edition) */
-.paper-container.midnight {
-  background-color: #1a1e29;
-  border: 1px solid #333a4d;
-  color: #e5c158; /* Warm Gold Text */
-}
-
-.paper-container.midnight .letter-body,
-.paper-container.midnight .letter-header,
-.paper-container.midnight .signature {
-  color: #e5c158 !important;
-  text-shadow: 0 0 1px rgba(229, 193, 88, 0.3);
-}
-
-.paper-container.midnight .wax-seal-graphic {
-  background-color: #d4af37; /* Gold Seal for Midnight Theme */
-  color: #1a1e29;
-  border-color: #b8860b;
-}
-/* Official Business A4 Template */
-.paper-container.official-a4 {
-  background-color: #ffffff;
-  border-top: 6px solid #1a365d; /* Elegant navy accent bar on top */
-  border-bottom: 1px solid #e2e8f0;
-  color: #1a202c;
-}
-
-/* Executive Cream Formal Template */
-.paper-container.executive-cream {
-  background-color: #faf8f5;
-  border-top: 6px solid #744210; /* Warm bronze accent bar on top */
-  border-bottom: 1px solid #ebdccb;
-  color: #2d3748;
-}
-/* Radio Choice Switcher */
-.radio-group {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.3rem;
-  margin-bottom: 0.5rem;
-}
-
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-/* File Upload Field Styling */
-input[type="file"] {
-  background: #fdfaf6;
-  border: 1px dashed #8b5a2b;
-  padding: 0.8rem;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
-}/* =============================================================
-   PART 9: MULTI-PAGE & OVERFLOW CONTROLS
-   ============================================================= */
-
-/* Dynamic Page Overflow Indicator in Preview */
-.paper-container {
-  overflow-y: auto; /* Allows smooth scrolling if letter exceeds 1 page */
-  scroll-behavior: smooth;
-}
-
-/* Visual Multi-Page Indicator Badge */
+/* Page Overflow Badge */
 .page-count-badge {
   position: absolute;
   top: 12px;
@@ -446,36 +358,29 @@ input[type="file"] {
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
-  font-family: sans-serif;
   pointer-events: none;
 }
 
-/* Ensure clean page breaks when printing via Ctrl + P */
-@media print {
-  .paper-container {
-    overflow: visible !important;
-    height: auto !important;
-  }
-
-  .letter-body {
-    page-break-inside: auto;
-  }
-
-  /* Force page breaks cleanly at paragraph ends if letter goes to page 2 */
-  p, div {
-    page-break-inside: avoid;
-  }
-
-  .page-count-badge {
-    display: none !important;
-  }
-}.logo span {
-  font-family: 'Cinzel', serif;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: #f4e8c1; /* Soft vintage gold text */
+.hidden {
+  display: none !important;
 }
 
-input[type="file"]:hover {
-  background: #f5eedf;
+/* Print Optimization */
+@media print {
+  .navbar, .control-panel, h2, .wax-seal-graphic, .page-count-badge {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+  }
+  .app-container, .preview-panel {
+    display: block;
+    background: none !important;
+    padding: 0 !important;
+  }
+  .paper-container {
+    box-shadow: none !important;
+    width: 100%;
+    padding: 2.5cm 2cm !important;
+  }
 }
