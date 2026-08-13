@@ -261,3 +261,135 @@ document.addEventListener('DOMContentLoaded', () => {
     rzp1.open();
   });
 });
+// Premium Template Pricing Constant
+const PREMIUM_TEMPLATE_PRICE = 20;
+
+// Expanded Preset Templates (Free & Premium)
+const emotionTemplates = {
+  // --- FREE TEMPLATES ---
+  love: {
+    font: "'Marck Script', cursive",
+    paper: "rose",
+    isPremium: false,
+    text: "My Dearest,\n\nI wanted to send you something physical—something you can hold in your hands—just to remind you how much you mean to me...\n\nForever yours,"
+  },
+  apology: {
+    font: "'Homemade Apple', cursive",
+    paper: "kraft",
+    isPremium: false,
+    text: "Dear,\n\nI’m writing this because sometimes spoken words aren't enough. I am truly sorry for what happened, and I genuinely want to make things right...\n\nWith love,"
+  },
+  birthday: {
+    font: "'Caveat', cursive",
+    paper: "classic",
+    isPremium: false,
+    text: "Happy Birthday!\n\nWishing you a fantastic year ahead filled with laughter, great memories, and endless happiness!\n\nCheers,"
+  },
+  vintage: {
+    font: "'Special Elite', monospace",
+    paper: "parchment",
+    isPremium: false,
+    text: "Dearest Friend,\n\nI am sending this letter across the miles to let you know you've been on my mind lately...\n\nWarm regards,"
+  },
+  official: {
+    font: "'Playfair Display', serif",
+    paper: "official-a4",
+    isPremium: false,
+    text: "To Whom It May Concern,\n\nI am writing to formally present...\n\nSincerely,\n"
+  },
+
+  // --- PREMIUM TEMPLATES (+₹20) ---
+  grief: {
+    font: "'Playfair Display', serif",
+    paper: "sympathy-silver",
+    isPremium: true,
+    text: "Dearest [Name],\n\nWords fall short during times like these. I was deeply saddened to hear about your loss. Please know that my thoughts and deepest sympathies are with you and your family.\n\nMay you find strength and peace in the memories you shared.\n\nWith heartfelt condolences,"
+  },
+  farewell: {
+    font: "'Alex Brush', cursive",
+    paper: "velvet-rose",
+    isPremium: true,
+    text: "My Dear Friend,\n\nAs you embark on this exciting new journey across the miles, I wanted to send you off with something timeless. Though distance may separate us, true friendship knows no boundaries.\n\nWishing you all the success in the world!\n\nAlways here for you,"
+  },
+  milestone: {
+    font: "'Cinzel', serif",
+    paper: "gold-royal-crest",
+    isPremium: true,
+    text: "Dear [Name],\n\nCongratulations on this extraordinary milestone! Your dedication, persistence, and passion have truly paid off. This achievement is just the beginning of great things to come.\n\nWith immense pride and warmest wishes,"
+  },
+  confession: {
+    font: "'Great Vibes', cursive",
+    paper: "minimalist-black-label",
+    isPremium: true,
+    text: "To Someone Very Special,\n\nI have carried these thoughts for a long time, and I felt it was finally time to put them into ink. Some feelings are too meaningful to stay unsaid...\n\nYours truly,"
+  },
+  poetry: {
+    font: "'Special Elite', monospace",
+    paper: "vintage-aged",
+    isPremium: true,
+    text: "Upon a quiet evening hour,\nWhen memory soft softly gleams,\nI send this letter through the night,\nTo meet you in your dreams...\n\nDedicated to you,"
+  },
+  executive_gold: {
+    font: "'Cinzel', serif",
+    paper: "gold-royal-crest",
+    isPremium: true,
+    text: "CONFIDENTIAL / EXECUTIVE COMMUNIQUE\n\nDear [Title / Name],\n\nIt is my distinct honor to extend this invitation on behalf of the board...\n\nBest Regards,\n"
+  }
+};
+
+// Premium Paper List for Standalone Paper Selector
+const premiumPapers = [
+  'sympathy-silver',
+  'gold-royal-crest',
+  'vintage-aged',
+  'velvet-rose',
+  'minimalist-black-label',
+  'celebration-confetti'
+];
+
+// Dynamic Price Calculation
+function updatePriceAndAddons() {
+  let total = BASE_PRICE;
+
+  // Add Wax Seal
+  if (waxSealCheckbox.checked) {
+    total += WAX_SEAL_PRICE;
+    previewWaxSeal.classList.remove('hidden');
+  } else {
+    previewWaxSeal.classList.add('hidden');
+  }
+
+  // Add Fragrance
+  if (scentedCheckbox.checked) total += SCENTED_PRICE;
+
+  // Check if current paper or emotion is Premium
+  const isPremiumPaper = premiumPapers.includes(paperSelect.value);
+  const selectedEmotion = emotionTemplates[emotionSelect.value];
+  const isPremiumEmotion = selectedEmotion && selectedEmotion.isPremium;
+
+  if (isPremiumPaper || isPremiumEmotion) {
+    total += PREMIUM_TEMPLATE_PRICE;
+    showPremiumBadge(true);
+  } else {
+    showPremiumBadge(false);
+  }
+
+  totalPriceEl.textContent = total;
+}
+
+// Show/Hide Premium Gold Badge on Letter Preview
+function showPremiumBadge(show) {
+  let badge = document.querySelector('.premium-badge');
+  if (!badge && show) {
+    badge = document.createElement('div');
+    badge.className = 'premium-badge';
+    badge.textContent = '⭐ Premium Letterhead';
+    paperPreview.appendChild(badge);
+  } else if (badge && !show) {
+    badge.remove();
+  }
+}
+
+// Ensure paper/emotion change triggers price check
+paperSelect.addEventListener('change', updatePriceAndAddons);
+emotionSelect.addEventListener('change', updatePriceAndAddons);
