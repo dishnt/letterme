@@ -157,3 +157,40 @@ document.addEventListener('DOMContentLoaded', () => {
     alert(`Order Created! Total payable: ₹${orderSummary.totalAmount}\n\nNext step: Connecting to Razorpay Payment Gateway!`);
   });
 });
+// File Upload Elements
+  const docTypeRadios = document.querySelectorAll('input[name="docType"]');
+  const uploadGroup = document.getElementById('uploadGroup');
+  const letterGroup = letterTextInput.parentElement; // Textarea container
+  const documentFileInput = document.getElementById('documentFile');
+
+  // Switch between Typing mode and File Upload mode
+  docTypeRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (e.target.value === 'upload') {
+        uploadGroup.classList.remove('hidden');
+        letterGroup.classList.add('hidden');
+        previewBody.innerHTML = '<em>📄 Custom file upload selected. Ready to print upon checkout!</em>';
+      } else {
+        uploadGroup.classList.add('hidden');
+        letterGroup.classList.remove('hidden');
+        previewBody.textContent = letterTextInput.value.trim().length > 0 
+          ? letterTextInput.value 
+          : 'Start typing on the left to see your letter come to life...';
+      }
+    });
+  });
+
+  // Handle File Selection Preview
+  documentFileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      previewBody.innerHTML = `
+        <div style="text-align: center; padding: 2rem; border: 2px dashed #999; border-radius: 8px;">
+          <p style="font-weight: bold; font-size: 1.2rem;">📎 File Uploaded</p>
+          <p><strong>Name:</strong> ${file.name}</p>
+          <p><strong>Size:</strong> ${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p style="margin-top: 1rem; color: #2e7d32;">✓ Ready to print in original quality</p>
+        </div>
+      `;
+    }
+  });
