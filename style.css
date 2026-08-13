@@ -299,3 +299,44 @@ textarea {
     color: #111111 !important;
   }
 }
+/* =============================================================
+   NEW AESTHETIC PAPER TEMPLATES
+   ============================================================= */
+
+/* 1. Vintage Kraft Paper */
+.paper-container.kraft {
+  background-color: #d1b280;
+  background-image: radial-gradient(#b89865 15%, transparent 16%);
+  background-size: 10px 10px;
+  border: 1px solid #aa8957;
+  color: #2b1d0c;
+}
+
+/* 2. Rose Romance (Soft Blush Pink) */
+.paper-container.rose {
+  background-color: #fdf0f2;
+  background-image: radial-gradient(#f7d3d9 20%, transparent 20%);
+  background-size: 16px 16px;
+  border: 1px solid #f2bdc6;
+  color: #4a2c33;
+}
+
+/* 3. Midnight Gold (Dark Luxury Edition) */
+.paper-container.midnight {
+  background-color: #1a1e29;
+  border: 1px solid #333a4d;
+  color: #e5c158; /* Warm Gold Text */
+}
+
+.paper-container.midnight .letter-body,
+.paper-container.midnight .letter-header,
+.paper-container.midnight .signature {
+  color: #e5c158 !important;
+  text-shadow: 0 0 1px rgba(229, 193, 88, 0.3);
+}
+
+.paper-container.midnight .wax-seal-graphic {
+  background-color: #d4af37; /* Gold Seal for Midnight Theme */
+  color: #1a1e29;
+  border-color: #b8860b;
+}
