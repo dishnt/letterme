@@ -40,18 +40,32 @@
           <textarea id="recipientDetails" rows="3" placeholder="Full Name&#10;House No., Street Area&#10;City, State - PIN Code" required></textarea>
         </div>
 
-        <!-- Occasion / Emotion Selector -->
-        <div class="form-group">
-          <label for="emotionSelect">Choose Occasion / Vibe 💫</label>
-          <select id="emotionSelect">
-            <option value="custom" selected>Custom / Freeform</option>
-            <option value="love">❤️ Love & Romance (Warm & Delicate)</option>
-            <option value="apology">🥺 Heartfelt Apology (Personal Handwriting)</option>
-            <option value="birthday">🎉 Birthday & Celebration (Vibrant & Cheerful)</option>
-            <option value="vintage">📜 Vintage Nostalgia (Old-world Typewriter)</option>
-            <option value="official">💼 Corporate / Official (Clean & Professional)</option>
-          </select>
-        </div>
+      <!-- Occasion / Emotion Selector -->
+<div class="form-group">
+  <label for="emotionSelect">Choose Occasion / Vibe 💫</label>
+  <select id="emotionSelect">
+    <option value="custom" selected>Custom / Freeform</option>
+
+    <!-- Basic Occasions -->
+    <optgroup label="Free Templates">
+      <option value="love">❤️ Love & Romance (Warm & Delicate)</option>
+      <option value="apology">🥺 Heartfelt Apology (Personal)</option>
+      <option value="birthday">🎉 Birthday & Celebration (Cheerful)</option>
+      <option value="vintage">📜 Vintage Nostalgia (Typewriter)</option>
+      <option value="official">💼 Formal Business (Clean)</option>
+    </optgroup>
+
+    <!-- Premium Occasions -->
+    <optgroup label="⭐ Premium Templates (+₹20)">
+      <option value="grief">🕊️ Sympathy & Condolences (Somber Silver)</option>
+      <option value="farewell">✈️ Long Distance / Farewell (Travel Map)</option>
+      <option value="milestone">🎓 Graduation & Achievement (Gold Leaf)</option>
+      <option value="confession">💌 Secret Admirer / Deep Confession (Midnight Velvet)</option>
+      <option value="poetry">📜 Classic Poetry / Ode (Vintage Quill)</option>
+      <option value="executive_gold">👑 CEO Executive Letterhead (Royal Crest)</option>
+    </optgroup>
+  </select>
+</div>
 
         <!-- Choice Switcher: Type or Upload -->
         <div class="form-group">
@@ -79,24 +93,29 @@
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="paperSelect">Paper Template</label>
-            <select id="paperSelect">
-              <!-- Professional Templates -->
-              <option value="corp-letterhead">Corporate Letterhead (Navy Header)</option>
-              <option value="exec-minimal">Executive Minimalist (Gray Border)</option>
-              <option value="modern-sidebar">Modern Professional (Accent Border)</option>
-              <option value="cert-formal">Formal Certificate / Award</option>
-              <!-- Emotional & Creative Templates -->
-              <option value="official-a4">Official Business (Clean White)</option>
-              <option value="executive-cream">Executive Cream (Formal)</option>
-              <option value="parchment">Antique Parchment</option>
-              <option value="kraft">Recycled Kraft Paper</option>
-              <option value="rose">Rose Romance</option>
-              <option value="midnight">Midnight Gold (Dark Mode)</option>
-            </select>
-          </div>
-        </div>
+         <!-- Paper Template Switcher -->
+<div class="form-group">
+  <label for="paperSelect">Paper Template Style</label>
+  <select id="paperSelect">
+    <optgroup label="Standard Papers (Free)">
+      <option value="official-a4">Official Business (Clean White)</option>
+      <option value="executive-cream">Executive Cream</option>
+      <option value="parchment">Antique Parchment</option>
+      <option value="kraft">Recycled Kraft Paper</option>
+      <option value="rose">Rose Romance</option>
+      <option value="midnight">Midnight Gold</option>
+    </optgroup>
+
+    <optgroup label="⭐ Premium Papers (+₹20)">
+      <option value="sympathy-silver">🕊️ Sympathy Silver Border (Somber)</option>
+      <option value="gold-royal-crest">👑 Royal Gold Crest Letterhead</option>
+      <option value="vintage-aged">📜 Aged 1800s Handcrafted Parchment</option>
+      <option value="velvet-rose">🌹 Pressed Floral Velvet</option>
+      <option value="minimalist-black-label">🖤 Minimalist Noir Luxury</option>
+      <option value="celebration-confetti">🎉 Celebration Gold Dust</option>
+    </optgroup>
+  </select>
+</div>
 
         <!-- Logo / Header Photo Upload -->
         <div class="form-group">
