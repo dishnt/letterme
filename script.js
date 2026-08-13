@@ -2,11 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements - Inputs
   const senderNameInput = document.getElementById('senderName');
   const letterTextInput = document.getElementById('letterText');
+  const letterTextGroup = document.getElementById('letterTextGroup');
   const fontSelect = document.getElementById('fontSelect');
   const paperSelect = document.getElementById('paperSelect');
   const waxSealCheckbox = document.getElementById('waxSeal');
   const scentedCheckbox = document.getElementById('scented');
   const letterForm = document.getElementById('letterForm');
+
+  // File Upload Elements
+  const docTypeRadios = document.querySelectorAll('input[name="docType"]');
+  const uploadGroup = document.getElementById('uploadGroup');
+  const documentFileInput = document.getElementById('documentFile');
+
+  // Spacing Elements
+  const fontSizeSelect = document.getElementById('fontSizeSelect');
+  const lineHeightSelect = document.getElementById('lineHeightSelect');
 
   // DOM Elements - Preview
   const paperPreview = document.getElementById('paperPreview');
@@ -21,158 +31,80 @@ document.addEventListener('DOMContentLoaded', () => {
   const WAX_SEAL_PRICE = 29;
   const SCENTED_PRICE = 19;
 
-  // -------------------------------------------------------------
-  // Web Audio API: Synthetic Typewriter Click Sound
-  // -------------------------------------------------------------
+  // Web Audio API: Typewriter Sound
   let audioCtx = null;
-
   function playTypewriterClick() {
-    // Lazy initialize AudioContext on user interaction
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
-
-    // Create a burst of white noise for the tactile key impact
-    const bufferSize = audioCtx.sampleRate * 0.015; // 15ms sound
+    const bufferSize = audioCtx.sampleRate * 0.015;
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
-
     for (let i = 0; i < bufferSize; i++) {
       data[i] = Math.random() * 2 - 1;
     }
-
     const noise = audioCtx.createBufferSource();
     noise.buffer = buffer;
-
-    // Highpass filter to mimic metallic/mechanical snap
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'highpass';
-    filter.frequency.value = 1000 + Math.random() * 400; // Slight pitch variation per keypress
-
+    filter.frequency.value = 1000 + Math.random() * 400;
     const gain = audioCtx.createGain();
     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.015);
-
     noise.connect(filter);
     filter.connect(gain);
     gain.connect(audioCtx.destination);
-
     noise.start();
   }
 
-  // -------------------------------------------------------------
-  // App Logic & State
-  // -------------------------------------------------------------
-
-  // 1. Set Today's Date automatically in the preview
+  // 1. Set Today's Date
   const today = new Date();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   previewDate.textContent = `Date: ${today.toLocaleDateString('en-IN', options)}`;
 
-  // 2. Real-time Letter Text Update + Audio Trigger
+  // 2. Real-time Letter Text Update
   letterTextInput.addEventListener('input', (e) => {
     const text = e.target.value;
     previewBody.textContent = text.trim().length > 0 
       ? text 
       : 'Start typing on the left to see your letter come to life...';
-
-    // Play click audio effect
     playTypewriterClick();
+    checkPageOverflow();
   });
 
-  // 3. Real-time Sender Name / Signature Update
+  // 3. Sender Signature Update
   senderNameInput.addEventListener('input', (e) => {
     const name = e.target.value;
     previewSignature.textContent = name.trim().length > 0 ? `— ${name}` : '';
   });
 
-  // 4. Change Font Dynamically
+  // 4. Font & Paper Selectors
   fontSelect.addEventListener('change', (e) => {
     previewBody.style.fontFamily = e.target.value;
     previewSignature.style.fontFamily = e.target.value;
   });
 
-  // Set initial default font
-  previewBody.style.fontFamily = fontSelect.value;
-  previewSignature.style.fontFamily = fontSelect.value;
-
-  // 5. Change Paper Style Dynamically
   paperSelect.addEventListener('change', (e) => {
-    // Remove all previous paper theme classes
     paperPreview.classList.remove(
-     'official-a4',
-      'executive-cream',
-      'parchment', 
-      'kraft', 
-      'rose', 
-      'midnight', 
-      'classic', 
-      'pure-white'
+      'official-a4', 'executive-cream', 'parchment', 
+      'kraft', 'rose', 'midnight', 'classic', 'pure-white'
     );
-    // Apply selected theme class
     paperPreview.classList.add(e.target.value);
   });
 
-  // 6. Calculate Price and Toggle Wax Seal Preview
-  function updatePriceAndAddons() {
-    let total = BASE_PRICE;
-
-    if (waxSealCheckbox.checked) {
-      total += WAX_SEAL_PRICE;
-      previewWaxSeal.classList.remove('hidden');
-    } else {
-      previewWaxSeal.classList.add('hidden');
-    }
-
-    if (scentedCheckbox.checked) {
-      total += SCENTED_PRICE;
-    }
-
-    totalPriceEl.textContent = total;
-  }
-
-  waxSealCheckbox.addEventListener('change', updatePriceAndAddons);
-  scentedCheckbox.addEventListener('change', updatePriceAndAddons);
-
-  // 7. Handle Form Submission
-  letterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const orderSummary = {
-      sender: senderNameInput.value,
-      recipient: document.getElementById('recipientDetails').value,
-      message: letterTextInput.value,
-      font: fontSelect.value,
-      paper: paperSelect.value,
-      waxSeal: waxSealCheckbox.checked,
-      fragrance: scentedCheckbox.checked,
-      totalAmount: totalPriceEl.textContent
-    };
-
-    console.log('Order Submitted:', orderSummary);
-    alert(`Order Created! Total payable: ₹${orderSummary.totalAmount}\n\nNext step: Connecting to Razorpay Payment Gateway!`);
-  });
-});
-// File Upload Elements
-  const docTypeRadios = document.querySelectorAll('input[name="docType"]');
-  const uploadGroup = document.getElementById('uploadGroup');
-  const letterGroup = letterTextInput.parentElement; // Textarea container
-  const documentFileInput = document.getElementById('documentFile');
-
-  // Switch between Typing mode and File Upload mode
+  // 5. Radio Toggle (Type vs Upload File)
   docTypeRadios.forEach(radio => {
     radio.addEventListener('change', (e) => {
       if (e.target.value === 'upload') {
         uploadGroup.classList.remove('hidden');
-        letterGroup.classList.add('hidden');
-        previewBody.innerHTML = '<em>📄 Custom file upload selected. Ready to print upon checkout!</em>';
+        letterTextGroup.classList.add('hidden');
+        previewBody.innerHTML = '<em>📄 Custom file upload mode selected. Choose a file on the left!</em>';
       } else {
         uploadGroup.classList.add('hidden');
-        letterGroup.classList.remove('hidden');
+        letterTextGroup.classList.remove('hidden');
         previewBody.textContent = letterTextInput.value.trim().length > 0 
           ? letterTextInput.value 
           : 'Start typing on the left to see your letter come to life...';
@@ -180,56 +112,79 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle File Selection Preview
+  // 6. Handle File Chooser Selection
   documentFileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
       previewBody.innerHTML = `
-        <div style="text-align: center; padding: 2rem; border: 2px dashed #999; border-radius: 8px;">
-          <p style="font-weight: bold; font-size: 1.2rem;">📎 File Uploaded</p>
+        <div style="text-align: center; padding: 2rem; border: 2px dashed #8b5a2b; border-radius: 8px; background: rgba(255,255,255,0.7);">
+          <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">📎 File Selected</p>
           <p><strong>Name:</strong> ${file.name}</p>
           <p><strong>Size:</strong> ${(file.size / 1024 / 1024).toFixed(2)} MB</p>
-          <p style="margin-top: 1rem; color: #2e7d32;">✓ Ready to print in original quality</p>
+          <p style="margin-top: 1rem; color: #2e7d32; font-weight: bold;">✓ Ready to print in original quality</p>
         </div>
       `;
     }
   });
-// Dynamic Spacing DOM Elements
-  const fontSizeSelect = document.getElementById('fontSizeSelect');
-  const lineHeightSelect = document.getElementById('lineHeightSelect');
 
-  // Create & Append Page Counter Badge inside Preview
+  // 7. Dynamic Spacing & Page Overflow Badge
   const pageBadge = document.createElement('div');
   pageBadge.className = 'page-count-badge';
   pageBadge.textContent = 'Page 1 of 1';
   paperPreview.appendChild(pageBadge);
 
-  // 1. Adjust Font Size Dynamically
   fontSizeSelect.addEventListener('change', (e) => {
     previewBody.style.fontSize = e.target.value;
     checkPageOverflow();
   });
 
-  // 2. Adjust Line Spacing Dynamically
   lineHeightSelect.addEventListener('change', (e) => {
     previewBody.style.lineHeight = e.target.value;
     checkPageOverflow();
   });
 
-  // 3. Detect multi-page overflow dynamically
   function checkPageOverflow() {
-    // Standard A4 height threshold
     const isOverflowing = paperPreview.scrollHeight > paperPreview.clientHeight;
-
     if (isOverflowing) {
       const estimatedPages = Math.ceil(paperPreview.scrollHeight / paperPreview.clientHeight);
       pageBadge.textContent = `Page 1 of ${estimatedPages} (Multi-Page)`;
-      pageBadge.style.background = '#c62828'; // Alert red
+      pageBadge.style.background = '#c62828';
     } else {
       pageBadge.textContent = 'Fits on 1 Page';
-      pageBadge.style.background = 'rgba(0, 0, 0, 0.6)'; // Normal dark
+      pageBadge.style.background = 'rgba(0, 0, 0, 0.6)';
     }
   }
 
-  // Monitor text input for page overflow updates
-  letterTextInput.addEventListener('input', checkPageOverflow);
+  // 8. Addons & Pricing
+  function updatePriceAndAddons() {
+    let total = BASE_PRICE;
+    if (waxSealCheckbox.checked) {
+      total += WAX_SEAL_PRICE;
+      previewWaxSeal.classList.remove('hidden');
+    } else {
+      previewWaxSeal.classList.add('hidden');
+    }
+    if (scentedCheckbox.checked) {
+      total += SCENTED_PRICE;
+    }
+    totalPriceEl.textContent = total;
+  }
+
+  waxSealCheckbox.addEventListener('change', updatePriceAndAddons);
+  scentedCheckbox.addEventListener('change', updatePriceAndAddons);
+
+  // 9. Submit Order
+  letterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const orderSummary = {
+      sender: senderNameInput.value,
+      recipient: document.getElementById('recipientDetails').value,
+      docType: document.querySelector('input[name="docType"]:checked').value,
+      message: letterTextInput.value,
+      file: documentFileInput.files[0] ? documentFileInput.files[0].name : 'None',
+      paper: paperSelect.value,
+      totalAmount: totalPriceEl.textContent
+    };
+    alert(`Order Created for ₹${orderSummary.totalAmount}!\nDocument Type: ${orderSummary.docType}`);
+  });
+});
