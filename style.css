@@ -469,6 +469,11 @@ input[type="file"] {
   .page-count-badge {
     display: none !important;
   }
+}.logo span {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #f4e8c1; /* Soft vintage gold text */
 }
 
 input[type="file"]:hover {
