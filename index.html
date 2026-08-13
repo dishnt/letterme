@@ -79,7 +79,26 @@
         <div class="form-group">
           <label for="letterText">Your Letter Message</label>
           <textarea id="letterText" rows="7" placeholder="Start typing your letter here... watch it render live on the right!" required></textarea>
-        </div>
+        </div><!-- Text Layout & Page Spacing Controls -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="fontSizeSelect">Text Size</label>
+    <select id="fontSizeSelect">
+      <option value="0.95rem">Compact (Squeeze more text)</option>
+      <option value="1.1rem" selected>Standard (Default)</option>
+      <option value="1.25rem">Large (Shorter notes)</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="lineHeightSelect">Line Spacing</label>
+    <select id="lineHeightSelect">
+      <option value="1.3">Tight (1.3)</option>
+      <option value="1.6" selected>Normal (1.6)</option>
+      <option value="1.9">Relaxed (1.9)</option>
+    </select>
+  </div>
+</div>
 <!-- Choice Switcher: Type or Upload -->
 <div class="form-group">
   <label>How would you like to send your document?</label>
