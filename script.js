@@ -21,17 +21,67 @@ document.addEventListener('DOMContentLoaded', () => {
   const WAX_SEAL_PRICE = 29;
   const SCENTED_PRICE = 19;
 
+  // -------------------------------------------------------------
+  // Web Audio API: Synthetic Typewriter Click Sound
+  // -------------------------------------------------------------
+  let audioCtx = null;
+
+  function playTypewriterClick() {
+    // Lazy initialize AudioContext on user interaction
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    // Create a burst of white noise for the tactile key impact
+    const bufferSize = audioCtx.sampleRate * 0.015; // 15ms sound
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+
+    // Highpass filter to mimic metallic/mechanical snap
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.value = 1000 + Math.random() * 400; // Slight pitch variation per keypress
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.015);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    noise.start();
+  }
+
+  // -------------------------------------------------------------
+  // App Logic & State
+  // -------------------------------------------------------------
+
   // 1. Set Today's Date automatically in the preview
   const today = new Date();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   previewDate.textContent = `Date: ${today.toLocaleDateString('en-IN', options)}`;
 
-  // 2. Real-time Letter Text Update
+  // 2. Real-time Letter Text Update + Audio Trigger
   letterTextInput.addEventListener('input', (e) => {
     const text = e.target.value;
     previewBody.textContent = text.trim().length > 0 
       ? text 
       : 'Start typing on the left to see your letter come to life...';
+
+    // Play click audio effect
+    playTypewriterClick();
   });
 
   // 3. Real-time Sender Name / Signature Update
@@ -52,9 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Change Paper Style Dynamically
   paperSelect.addEventListener('change', (e) => {
-    // Remove previous paper classes
     paperPreview.classList.remove('parchment', 'classic', 'pure-white');
-    // Add selected class
     paperPreview.classList.add(e.target.value);
   });
 
@@ -79,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   waxSealCheckbox.addEventListener('change', updatePriceAndAddons);
   scentedCheckbox.addEventListener('change', updatePriceAndAddons);
 
-  // 7. Handle Form Submission (Checkout Mock)
+  // 7. Handle Form Submission
   letterForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
