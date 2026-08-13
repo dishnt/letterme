@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TypePost - Send Physical Letters Online</title>
+  <title>SOULPOST - Send Physical Letters Online</title>
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css" />
@@ -80,7 +80,21 @@
           <label for="letterText">Your Letter Message</label>
           <textarea id="letterText" rows="7" placeholder="Start typing your letter here... watch it render live on the right!" required></textarea>
         </div>
+<!-- Choice Switcher: Type or Upload -->
+<div class="form-group">
+  <label>How would you like to send your document?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="docType" value="type" checked> Type Online</label>
+    <label><input type="radio" name="docType" value="upload"> Upload PDF/Image</label>
+  </div>
+</div>
 
+<!-- File Upload Input (Hidden by default) -->
+<div class="form-group hidden" id="uploadGroup">
+  <label for="documentFile">Upload PDF or Document (Max 10MB)</label>
+  <input type="file" id="documentFile" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+  <small style="color: #666; font-size: 0.8rem;">Supported formats: PDF, DOCX, PNG, JPG</small>
+</div>
         <!-- Add-ons Selection -->
         <div class="addons-section">
           <h3>Add-ons</h3>
