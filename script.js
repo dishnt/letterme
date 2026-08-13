@@ -393,3 +393,30 @@ function showPremiumBadge(show) {
 // Ensure paper/emotion change triggers price check
 paperSelect.addEventListener('change', updatePriceAndAddons);
 emotionSelect.addEventListener('change', updatePriceAndAddons);
+// DOM Elements for Attachment
+const attachmentFileInput = document.getElementById('attachmentFileInput');
+const attachmentStatus = document.getElementById('attachmentStatus');
+const attachmentFileName = document.getElementById('attachmentFileName');
+const removeAttachmentBtn = document.getElementById('removeAttachmentBtn');
+
+// Handle Attachment Selection
+attachmentFileInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    // Check file size limit (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size exceeds 10MB limit!');
+      attachmentFileInput.value = '';
+      attachmentStatus.classList.add('hidden');
+      return;
+    }
+    attachmentFileName.textContent = `${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+    attachmentStatus.classList.remove('hidden');
+  }
+});
+
+// Remove Attachment
+removeAttachmentBtn.addEventListener('click', () => {
+  attachmentFileInput.value = '';
+  attachmentStatus.classList.add('hidden');
+});
