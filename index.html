@@ -8,10 +8,10 @@
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css" />
   
-  <!-- Google Fonts for Vintage & Handwriting styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Courier+Prime&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+ <!-- Enhanced Google Fonts Library -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@500&family=Cinzel:wght@500;700&family=Courier+Prime&family=Great+Vibes&family=Homemade+Apple&family=Marck+Script&family=Playfair+Display:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -42,27 +42,40 @@
 
         <!-- Customization Options -->
         <div class="form-row">
-          <div class="form-group">
-            <label for="fontSelect">Choose Font</label>
-            <select id="fontSelect">
-              <option value="'Special Elite', monospace">Vintage Typewriter</option>
-              <option value="'Courier Prime', monospace">Classic Courier</option>
-              <option value="'Caveat', cursive">Casual Handwriting</option>
-              <option value="'Great Vibes', cursive">Elegant Calligraphy</option>
-            </select>
-          </div>
+  <div class="form-group">
+    <label for="fontSelect">Choose Font Style</label>
+    <select id="fontSelect">
+      <!-- Vintage & Typewriter -->
+      <option value="'Special Elite', monospace">Vintage Typewriter</option>
+      <option value="'Courier Prime', monospace">Classic Courier</option>
+      
+      <!-- Handwriting & Personal -->
+      <option value="'Homemade Apple', cursive">Raw Ink Handwriting</option>
+      <option value="'Caveat', cursive">Casual Note</option>
+      
+      <!-- Elegant Cursive & Calligraphy -->
+      <option value="'Marck Script', cursive">Romantic Cursive</option>
+      <option value="'Great Vibes', cursive">Classic Calligraphy</option>
+      <option value="'Alex Brush', cursive">Graceful Script</option>
 
-          <div class="form-group">
-            <label for="paperSelect">Paper Style</label>
-            <select id="paperSelect">
-              <option value="parchment">Vintage Parchment</option>
-              <option value="classic">Classic Cream</option>
-              <option value="pure-white">Minimal White</option>
-            </select>
-          </div>
-        </div>
+      <!-- Luxury & Editorial -->
+      <option value="'Cinzel', serif">Royal Empire (Serif)</option>
+      <option value="'Playfair Display', serif">Editorial Luxury</option>
+    </select>
+  </div>
 
-        <!-- Letter Body Text Area -->
+  <div class="form-group">
+    <label for="paperSelect">Paper Template</label>
+    <select id="paperSelect">
+      <option value="parchment">Antique Parchment</option>
+      <option value="kraft">Recycled Kraft Paper</option>
+      <option value="rose">Rose Romance</option>
+      <option value="midnight">Midnight Gold (Dark Mode)</option>
+      <option value="classic">Classic Cream</option>
+      <option value="pure-white">Minimal White</option>
+    </select>
+  </div>
+</div> Area -->
         <div class="form-group">
           <label for="letterText">Your Letter Message</label>
           <textarea id="letterText" rows="7" placeholder="Start typing your letter here... watch it render live on the right!" required></textarea>
