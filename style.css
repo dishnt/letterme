@@ -387,3 +387,18 @@ textarea {
   color: #1a1e29;
   border-color: #b8860b;
 }
+/* Official Business A4 Template */
+.paper-container.official-a4 {
+  background-color: #ffffff;
+  border-top: 6px solid #1a365d; /* Elegant navy accent bar on top */
+  border-bottom: 1px solid #e2e8f0;
+  color: #1a202c;
+}
+
+/* Executive Cream Formal Template */
+.paper-container.executive-cream {
+  background-color: #faf8f5;
+  border-top: 6px solid #744210; /* Warm bronze accent bar on top */
+  border-bottom: 1px solid #ebdccb;
+  color: #2d3748;
+}
