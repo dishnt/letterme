@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TypePost - Send Physical Letters Online</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts for Vintage & Handwriting styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Courier+Prime&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
 
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">✉️ <span>TypePost</span></div>
+    <div class="tagline">Type virtually. Delivered physically.</div>
+  </header>
+
+  <!-- Main Container: Dual Panel -->
+  <main class="app-container">
+    
+    <!-- LEFT PANEL: User Controls & Inputs -->
+    <section class="control-panel">
+      <h2>Craft Your Letter</h2>
+      
+      <form id="letterForm">
+        <!-- Sender & Recipient Address Details -->
+        <div class="form-group">
+          <label for="senderName">Your Name (Sender)</label>
+          <input type="text" id="senderName" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-group">
+          <label for="recipientDetails">Recipient Address & PIN Code</label>
+          <textarea id="recipientDetails" rows="3" placeholder="Full Name&#10;House No., Street Area&#10;City, State - PIN Code" required></textarea>
+        </div>
+
+        <!-- Customization Options -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fontSelect">Choose Font</label>
+            <select id="fontSelect">
+              <option value="'Special Elite', monospace">Vintage Typewriter</option>
+              <option value="'Courier Prime', monospace">Classic Courier</option>
+              <option value="'Caveat', cursive">Casual Handwriting</option>
+              <option value="'Great Vibes', cursive">Elegant Calligraphy</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="paperSelect">Paper Style</label>
+            <select id="paperSelect">
+              <option value="parchment">Vintage Parchment</option>
+              <option value="classic">Classic Cream</option>
+              <option value="pure-white">Minimal White</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Letter Body Text Area -->
+        <div class="form-group">
+          <label for="letterText">Your Letter Message</label>
+          <textarea id="letterText" rows="7" placeholder="Start typing your letter here... watch it render live on the right!" required></textarea>
+        </div>
+
+        <!-- Add-ons Selection -->
+        <div class="addons-section">
+          <h3>Add-ons</h3>
+          <label class="checkbox-container">
+            <input type="checkbox" id="waxSeal" />
+            <span>Add Wax Seal (+₹29)</span>
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" id="scented" />
+            <span>Fragrance Spray (+₹19)</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="checkoutBtn" class="btn-primary">
+          Send Letter (₹<span id="totalPrice">49</span>)
+        </button>
+      </form>
+    </section>
+
+    <!-- RIGHT PANEL: Live Paper & Envelope Preview -->
+    <section class="preview-panel">
+      <h2>Live Letter Preview</h2>
+      
+      <div class="paper-container parchment" id="paperPreview">
+        <div class="letter-header">
+          <div class="date" id="previewDate">Date: </div>
+        </div>
+        
+        <div class="letter-body" id="previewBody">
+          Start typing on the left to see your letter come to life...
+        </div>
+        
+        <div class="letter-footer">
+          <div class="signature" id="previewSignature"></div>
+          <div id="previewWaxSeal" class="wax-seal-graphic hidden">Stamped</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
