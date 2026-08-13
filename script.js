@@ -102,7 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Change Paper Style Dynamically
   paperSelect.addEventListener('change', (e) => {
-    paperPreview.classList.remove('parchment', 'classic', 'pure-white');
+    // Remove all previous paper theme classes
+    paperPreview.classList.remove(
+      'parchment', 
+      'kraft', 
+      'rose', 
+      'midnight', 
+      'classic', 
+      'pure-white'
+    );
+    // Apply selected theme class
     paperPreview.classList.add(e.target.value);
   });
 
