@@ -384,3 +384,78 @@ textarea {
     padding: 2.5cm 2cm !important;
   }
 }
+/* =============================================================
+   PREMIUM TEMPLATE STYLES
+   ============================================================= */
+
+/* 1. Sympathy Silver (Grief & Condolence) */
+.paper-container.sympathy-silver {
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-top: 10px solid #64748b;
+  border-bottom: 10px solid #64748b;
+  color: #334155;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+}
+
+/* 2. Royal Gold Crest (CEO / Formal / Achievements) */
+.paper-container.gold-royal-crest {
+  background-color: #fffdfa;
+  border: 8px solid #d4af37;
+  border-image: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
+  color: #1a1a1a;
+}
+
+/* 3. Aged 1800s Handcrafted Parchment */
+.paper-container.vintage-aged {
+  background-color: #e2c9a1;
+  background-image: radial-gradient(#ba9d73 15%, transparent 16%), radial-gradient(#8c6d43 15%, transparent 16%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  color: #2c1d11;
+  border: 2px solid #a37c50;
+}
+
+/* 4. Pressed Floral Velvet (Love / Long Distance) */
+.paper-container.velvet-rose {
+  background-color: #fff5f6;
+  border-left: 12px solid #be123c;
+  border-right: 12px solid #be123c;
+  color: #4c0519;
+}
+
+/* 5. Minimalist Noir Luxury */
+.paper-container.minimalist-black-label {
+  background-color: #111827;
+  color: #f9fafb;
+  border: 1px solid #374151;
+}
+
+.paper-container.minimalist-black-label .letter-body,
+.paper-container.minimalist-black-label .signature,
+.paper-container.minimalist-black-label .letter-header {
+  color: #f9fafb !important;
+}
+
+/* 6. Celebration Gold Dust */
+.paper-container.celebration-confetti {
+  background-color: #ffffff;
+  border-top: 8px solid #f59e0b;
+  border-bottom: 8px solid #3b82f6;
+  box-shadow: inset 0 0 30px rgba(245, 158, 11, 0.08);
+}
+
+/* Premium Badge Indicator in Preview */
+.premium-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #d4af37, #aa771c);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
