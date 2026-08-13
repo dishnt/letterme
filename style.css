@@ -244,3 +244,58 @@ textarea {
     flex-direction: column;
   }
 }
+/* =============================================================
+   PART 5: PRINT STYLESHEET (Ctrl + P Optimization)
+   ============================================================= */
+
+@media print {
+  /* 1. Hide all website UI controls and background elements */
+  .navbar,
+  .control-panel,
+  h2,
+  .wax-seal-graphic {
+    display: none !important;
+  }
+
+  /* 2. Reset page background and layout */
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  .app-container {
+    display: block;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .preview-panel {
+    background: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 3. Standardize letter page to full A4 dimensions */
+  .paper-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 2.5cm 2cm !important; /* Standard 1-inch printable margins */
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important; /* Uses physical stationery paper texture */
+  }
+
+  .letter-body {
+    font-size: 14pt; /* Optimal physical print typography size */
+    line-height: 1.6;
+    color: #111111 !important;
+  }
+
+  .letter-header,
+  .signature {
+    color: #111111 !important;
+  }
+}
