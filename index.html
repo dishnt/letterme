@@ -123,7 +123,27 @@
           <input type="file" id="headerImageFile" accept="image/png, image/jpeg, image/webp" />
           <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">Attach a logo, headshot, or seal to embed on the letterhead.</small>
         </div>
+<!-- Letter Attachment / Supplemental Documents -->
+<div class="form-group">
+  <label for="attachmentFileInput">
+    📎 Attach Additional File with Letter (Optional)
+  </label>
+  <input 
+    type="file" 
+    id="attachmentFileInput" 
+    accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+  />
+  <small class="help-text">
+    Upload photos, certificates, or extra documents (PDF, JPG, PNG, DOCX - Max 10MB) to be printed and delivered along with this letter.
+  </small>
 
+  <!-- Attachment File Preview Status -->
+  <div id="attachmentStatus" class="attachment-status hidden">
+    <span class="file-icon">📄</span>
+    <span id="attachmentFileName" class="file-name">filename.pdf</span>
+    <button type="button" id="removeAttachmentBtn" class="remove-att-btn">✕</button>
+  </div>
+</div>
         <!-- Letter Body Text Area -->
         <div class="form-group" id="letterTextGroup">
           <label for="letterText">Your Letter Message</label>
