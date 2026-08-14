@@ -51,6 +51,150 @@
             <strong>Rahul</strong>
           </div>
         </div>
+<<<<<<< HEAD
+=======
+
+        <!-- Customization Options -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fontSelect">Choose Font Style</label>
+            <select id="fontSelect">
+              <option value="'Special Elite', monospace">Vintage Typewriter</option>
+              <option value="'Courier Prime', monospace">Classic Courier</option>
+              <option value="'Homemade Apple', cursive">Raw Ink Handwriting</option>
+              <option value="'Caveat', cursive">Casual Note</option>
+              <option value="'Marck Script', cursive">Romantic Cursive</option>
+              <option value="'Great Vibes', cursive">Classic Calligraphy</option>
+              <option value="'Alex Brush', cursive">Graceful Script</option>
+              <option value="'Cinzel', serif">Royal Empire (Serif)</option>
+              <option value="'Playfair Display', serif">Editorial Luxury</option>
+            </select>
+          </div>
+
+         <!-- Paper Template Switcher -->
+<div class="form-group">
+  <label for="paperSelect">Paper Template Style</label>
+  <select id="paperSelect">
+    <optgroup label="Standard Papers (Free)">
+      <option value="official-a4">Official Business (Clean White)</option>
+      <option value="executive-cream">Executive Cream</option>
+      <option value="parchment">Antique Parchment</option>
+      <option value="kraft">Recycled Kraft Paper</option>
+      <option value="rose">Rose Romance</option>
+      <option value="midnight">Midnight Gold</option>
+    </optgroup>
+
+    <optgroup label="⭐ Premium Papers (+₹20)">
+      <option value="sympathy-silver">🕊️ Sympathy Silver Border (Somber)</option>
+      <option value="gold-royal-crest">👑 Royal Gold Crest Letterhead</option>
+      <option value="vintage-aged">📜 Aged 1800s Handcrafted Parchment</option>
+      <option value="velvet-rose">🌹 Pressed Floral Velvet</option>
+      <option value="minimalist-black-label">🖤 Minimalist Noir Luxury</option>
+      <option value="celebration-confetti">🎉 Celebration Gold Dust</option>
+    </optgroup>
+  </select>
+</div>
+
+        <!-- Logo / Header Photo Upload -->
+        <div class="form-group">
+          <label for="headerImageFile">Add Logo / Photo Header (Optional)</label>
+          <input type="file" id="headerImageFile" accept="image/png, image/jpeg, image/webp" />
+          <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">Attach a logo, headshot, or seal to embed on the letterhead.</small>
+        </div>
+<!-- Letter Attachment / Supplemental Documents -->
+<div class="form-group">
+  <label for="attachmentFileInput">
+    📎 Attach Additional File with Letter (Optional)
+  </label>
+  <input 
+    type="file" 
+    id="attachmentFileInput" 
+    accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+  />
+  <small class="help-text">
+    Upload photos, certificates, or extra documents (PDF, JPG, PNG, DOCX - Max 10MB) to be printed and delivered along with this letter.
+  </small>
+
+  <!-- Attachment File Preview Status -->
+  <div id="attachmentStatus" class="attachment-status hidden">
+    <span class="file-icon">📄</span>
+    <span id="attachmentFileName" class="file-name">filename.pdf</span>
+    <button type="button" id="removeAttachmentBtn" class="remove-att-btn">✕</button>
+  </div>
+</div>
+        <!-- Letter Body Text Area -->
+        <div class="form-group" id="letterTextGroup">
+          <label for="letterText">Your Letter Message</label>
+          <textarea id="letterText" rows="7" placeholder="Start typing your letter here... watch it render live on the right!"></textarea>
+        </div>
+
+        <!-- File Upload Input (Hidden by default) -->
+        <div class="form-group hidden" id="uploadGroup">
+          <label for="documentFile">Upload PDF or Document (Max 10MB)</label>
+          <input type="file" id="documentFile" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+          <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 4px;">Supported formats: PDF, DOCX, PNG, JPG</small>
+        </div>
+
+        <!-- Text Layout & Page Spacing Controls -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fontSizeSelect">Text Size</label>
+            <select id="fontSizeSelect">
+              <option value="0.95rem">Compact (Squeeze more text)</option>
+              <option value="1.1rem" selected>Standard (Default)</option>
+              <option value="1.25rem">Large (Shorter notes)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="lineHeightSelect">Line Spacing</label>
+            <select id="lineHeightSelect">
+              <option value="1.3">Tight (1.3)</option>
+              <option value="1.6" selected>Normal (1.6)</option>
+              <option value="1.9">Relaxed (1.9)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="addons-section">
+          <h3>Add-ons</h3>
+          <label class="checkbox-container">
+            <input type="checkbox" id="waxSeal" />
+            <span>Add Wax Seal (+₹19)</span>
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" id="scented" />
+            <span>Fragrance Spray (+₹19)</span>
+          </label>
+        </div>
+
+        <!-- Checkout Button -->
+        <button type="submit" id="checkoutBtn" class="btn-primary">
+          Send Letter (₹<span id="totalPrice">49</span>)
+        </button>
+      </form>
+    </section>
+
+    <!-- RIGHT PANEL: Live A4 Preview -->
+    <section class="preview-panel">
+      <h2>Live Letter Preview</h2>
+      
+      <div class="paper-container official-a4" id="paperPreview">
+        <div class="preview-logo-container"></div>
+        <div class="letter-header">
+          <div class="date" id="previewDate">Date: </div>
+        </div>
+        
+        <div class="letter-body" id="previewBody">
+          Start typing on the left to see your letter come to life...
+        </div>
+        
+        <div class="letter-footer">
+          <div class="signature" id="previewSignature"></div>
+          <div id="previewWaxSeal" class="wax-seal-graphic hidden">Stamped</div>
+        </div>
+>>>>>>> d555e0c269e89c529234c4b41d28339be4ab1587
       </div>
     </section>
 

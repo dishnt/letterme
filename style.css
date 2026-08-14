@@ -954,6 +954,7 @@ input[type="file"] {
     min-height: 500px;
   }
 }
+<<<<<<< HEAD
 
 /* ==========================================================
    HOMEPAGE + LOGIN PAGE STYLES
@@ -1413,3 +1414,5 @@ body.login-page-body {
     padding: 24px 18px;
   }
 }
+=======
+>>>>>>> d555e0c269e89c529234c4b41d28339be4ab1587
